@@ -1,7 +1,9 @@
 <?php
 /**
  * http://news.google.co.jp/news?pz=1&cf=all&ned=jp&hl=ja&q
- * からニュースのタイトル一覧を取得して表示する。
+ * から
+ * 『ピックアップ』配下の
+ * ニュースのタイトル一覧を取得して表示する。
  */
 include_once ('./simple_html_dom.php');
 
@@ -38,8 +40,11 @@ function getData()
 	// create HTML DOM
 	$html = file_get_html('http://news.google.co.jp/news?pz=1&cf=all&ned=jp&hl=ja&q');
 	
-	// span.titletextを取得する
-	$ary = $html->find('span.titletext');
+	/**
+	 * 『ピックアップ』配下の
+	 * span.titletextを取得する
+	 */
+	$ary = $html->find('div[id=s_INTERESTING]', 0)->find('span.titletext');
 	
 	foreach($ary as $ent)
 	{
